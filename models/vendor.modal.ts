@@ -1,19 +1,19 @@
-import { model, Schema, Document, Model } from "mongoose";
+import { model, Schema, Document } from "mongoose";
 
 interface VendorDoc extends Document {
   name: string;
   ownerName: String;
   email: string;
   phone: string;
-  foodType: [string];
+  foodType: string[];
   address: string;
   pincode: string;
   password: string;
   salt: string;
   serviceAvailability: boolean;
-  coverImages: [string];
+  coverImages: string[];
   rating: number;
-  // foods: [Schema.Types.ObjectId];
+  foods: Schema.Types.ObjectId[];
 }
 
 const vendorSchema = new Schema(
@@ -30,7 +30,7 @@ const vendorSchema = new Schema(
     serviceAvailability: { type: Boolean },
     coverImages: { type: [String] },
     rating: { type: Number },
-    // foods: [{ type: Schema.Types.ObjectId, ref: "Food" }],
+    foods: [{ type: Schema.Types.ObjectId, ref: "Food" }],
   },
   {
     timestamps: true,

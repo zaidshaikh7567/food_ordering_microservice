@@ -1,4 +1,5 @@
 import { NextFunction, Request, Response } from "express";
+
 import { validateSignature } from "../utility";
 
 export const authenticate = async (

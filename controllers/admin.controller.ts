@@ -55,6 +55,7 @@ export const createVendor = async (
     rating: 0,
     serviceAvailability: false,
     coverImages: [],
+    foods: [],
   });
 
   res.json(createdVendor);

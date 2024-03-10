@@ -3,7 +3,7 @@ export interface CreateVendorInput {
   ownerName: String;
   email: string;
   phone: string;
-  foodType: [string];
+  foodType: string[];
   address: string;
   pincode: string;
   password: string;
@@ -18,12 +18,12 @@ export interface VendorPayload {
   _id: string;
   name: string;
   email: string;
-  foodTypes: [string];
+  foodTypes: string[];
 }
 
 export interface EditVendorInput {
   name: string;
   phone: string;
-  foodTypes: [string];
+  foodTypes: string[];
   address: string;
 }
