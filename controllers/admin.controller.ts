@@ -6,6 +6,17 @@ import { Vendor } from "../models";
 
 import { generatePasswordHash, generatePasswordHashSalt } from "../utility";
 
+type FindVendorOptions = {
+  id?: string;
+  email?: string;
+};
+
+export const findVendor = async (options: FindVendorOptions) => {
+  if (options.email) return await Vendor.findOne({ email: options.email });
+  else if (options.id) return await Vendor.findById(options.id);
+  return null;
+};
+
 export const createVendor = async (
   req: Request,
   res: Response,
@@ -22,7 +33,7 @@ export const createVendor = async (
     password,
   } = <CreateVendorInput>req.body;
 
-  const existingVendor = await Vendor.findOne({ email });
+  const existingVendor = await findVendor({ email });
 
   if (existingVendor) {
     return res.json({ message: "A vendor is exist with this email" });
@@ -54,7 +65,9 @@ export const getVendors = async (
   res: Response,
   next: NextFunction
 ) => {
-  res.json({ message: "All vendors" });
+  const vendors = await Vendor.find();
+
+  res.json({ vendors });
 };
 
 export const getVendor = async (
@@ -62,5 +75,9 @@ export const getVendor = async (
   res: Response,
   next: NextFunction
 ) => {
-  res.json({ message: "Single vendors" });
+  const vendorId = req.params.id;
+
+  const vendor = await findVendor({ id: vendorId });
+
+  res.json({ vendor });
 };
